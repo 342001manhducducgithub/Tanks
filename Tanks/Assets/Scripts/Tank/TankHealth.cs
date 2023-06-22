@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class TankHealth : MonoBehaviour
+public class TankHealth : NetworkBehaviour
 {
     public float m_StartingHealth = 100f;          
     public Slider m_Slider;                        
@@ -24,7 +25,10 @@ public class TankHealth : MonoBehaviour
 
         m_ExplosionParticles.gameObject.SetActive(false);
     }
-
+    private void Update()
+    {
+        if (!IsOwner) return;
+    }
 
     private void OnEnable()
     {
